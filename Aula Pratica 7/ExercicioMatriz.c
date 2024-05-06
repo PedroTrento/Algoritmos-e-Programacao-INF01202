@@ -30,25 +30,45 @@ int main(){
     while(seguir){
         printf("Entre o modelo, ano de fabricacao e placa do veiculo %d:", num_carros+1);
         fgets(modelo[num_carros], TAM_MODELO, stdin);
-        //scanf("%d", &anoFrabrica[num_carros]);
-        //fgets(placa[num_carros], TAM_PLACA, stdin);
+        //esse if serve para retirar o enter que o fgets pega ao digitar.
+        //poderia ter usado o gets que não pega o enter, mas achei melhor continuar usando o fgets para me acosturmar a utilizar a melhor forma de captar uma string
+        if(modelo[num_carros][strlen(modelo[num_carros]) - 1] == '\n'){
+            modelo[num_carros][strlen(modelo[num_carros]) - 1] = '\0';
+        }
 
+        scanf("%d", &anoFrabrica[num_carros]);
+        getchar();
+        fgets(placa[num_carros], TAM_PLACA, stdin);
 
-        printf("Impressao dos veiculos lidos:\n");
-        for(int i = 0; i < num_carros ; i++){
-            printf("%s, %d, %s \n", modelo[i], anoFrabrica[i], placa[i]);
+        //esse if serve para retirar o enter que o fgets pega ao digitar.
+        //poderia ter usado o gets que não pega o enter, mas achei melhor continuar usando o fgets para me acosturmar a utilizar a melhor forma de captar uma string
+        if(placa[num_carros][strlen(placa[num_carros]) - 1] == '\n'){
+            placa[num_carros][strlen(placa[num_carros]) - 1] = '\0';
         }
 
         if(anoFrabrica[num_carros] < 0 ){
             seguir = 0;
+            num_carros--;
         }
         num_carros++;
     }
 
     printf("Impressao dos veiculos lidos:\n");
     for(int i = 0; i < num_carros ; i++){
-        printf("%s, %d, %s \n", modelo[i], anoFrabrica[i], placa[i]);
+        printf("%s, ano %d, %s \n", modelo[i], anoFrabrica[i], placa[i]);
     }
+
+
+
+    printf("Modelos e anos de fabricação dos veiculos com placa de final 7:\n");
+    for(int i = 0; i < num_carros ; i++){
+        if(placa[i][strlen(placa[i])-1] == '7'){
+            printf("%s, ano %d\n", modelo[i], anoFrabrica[i]);
+        }
+    }
+
+
+
 
     return 0;
 }
